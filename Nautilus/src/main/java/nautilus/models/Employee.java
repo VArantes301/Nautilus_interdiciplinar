@@ -47,7 +47,7 @@ public class Employee {
     }
 
     public void setCpf(String fCpf) {
-        if (fCpf != null && fCpf.matches("[0-9]+") && fCpf.length() == 11) {
+        if (fCpf != null && fCpf.replace(" ", "").matches("[0-9]+") && fCpf.length() == 11) {
             this.cpf = fCpf;
         } else {
             throw new IllegalArgumentException("CPF invalido!");
@@ -82,10 +82,11 @@ public class Employee {
     }
 
     public void setDataNasc(LocalDate fDataNasc) {
-        if (fDataNasc == null || fDataNasc.isAfter(LocalDate.now())) {
+        if (fDataNasc != null && fDataNasc.isBefore(LocalDate.now())) {
+            this.dataNasc = fDataNasc
+        } else {
             throw new IllegalArgumentException("Digite uma data valida.");
         }
-        this.dataNasc = fDataNasc;
     }
 
     public String getMatricula() {

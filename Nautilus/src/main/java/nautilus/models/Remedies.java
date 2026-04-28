@@ -90,8 +90,11 @@ public class Remedies {
     }
 
     public void setStatus(EnumRem.opStatus rStatus) {
-        if (rStatus == null) throw new IllegalArgumentException("Status invalido!");
-        this.status = rStatus;
+        if (rStatus == null) {
+            this.status = rStatus;
+        } else {
+            throw new IllegalArgumentException("Status invalido!");
+        }
     }
 
     public int getQuant() {
