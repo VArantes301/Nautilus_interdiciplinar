@@ -1,6 +1,7 @@
 package nautilus.models;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import nautilus.enums.EnumEmp;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -12,13 +13,13 @@ public class Employee {
     private String cpf;
     private String rg;
     private EnumEmp.EnumEmpl funcao;
-    private LocalDate dataNasc;
+    private String dataNasc;
     private String senha;
     private String matricula;
     private final int id;
 
     public Employee(String nome, String cpf, String rg, EnumEmp.EnumEmpl funcao,
-                    String matricula, LocalDate dataNasc, String senha) {
+                    String matricula, String dataNasc, String senha) {
 
         setNome(nome);
         setCpf(cpf);
@@ -77,15 +78,25 @@ public class Employee {
         this.funcao = fFuncao;
     }
 
-    public LocalDate getDataNasc() {
+    public String getDataNasc() {
         return this.dataNasc;
     }
 
-    public void setDataNasc(LocalDate fDataNasc) {
-        if (fDataNasc != null && fDataNasc.isBefore(LocalDate.now())) {
-            this.dataNasc = fDataNasc
-        } else {
-            throw new IllegalArgumentException("Digite uma data valida.");
+    public void setDataNasc(String fDataNasc) {
+        try {
+            DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate data = LocalDate.parse(fDataNasc, formatador);
+
+            if (data.isBefore(LocalDate.now())) {
+                this.dataNasc = fDataNasc;
+            } else {
+                throw new IllegalArgumentException("Digite uma data valida.");
+            }
+
+        } catch (IllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Formato de data invalido! Use dd/MM/yyyy.");
         }
     }
 

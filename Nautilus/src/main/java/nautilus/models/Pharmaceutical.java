@@ -2,6 +2,9 @@ package nautilus.models;
 
 import java.time.LocalDate;
 
+import nautilus.enums.EnumEmp;
+import nautilus.enums.EnumRem;
+
 public class Pharmaceutical extends Employee {
 
     private String crf;
@@ -9,7 +12,7 @@ public class Pharmaceutical extends Employee {
     public Pharmaceutical (String nome, String cpf, String rg, String matricula, LocalDate dataNasc, String senha,
                            String crf) {
 
-        super(nome, cpf, rg, EnumEmp.Enumempl.FARMACEUTICO, matricula, dataNasc, senha);
+        super(nome, cpf, rg, EnumEmp.EnumEmpl.FARMACEUTICO, matricula, dataNasc, senha);
 
         setCrf(crf);
     }
@@ -33,7 +36,7 @@ public class Pharmaceutical extends Employee {
         try {
             aRemedies.setNome(nomeRem);
             aRemedies.setTarja(tarjaRem);
-            aRemedies.getForFarmac(farmacRem);
+            aRemedies.setForFarmac(farmacRem);
             aRemedies.setViaAdm(viaAdmRem);
             aRemedies.setRegAnvisa(regAnvisaRem);
             aRemedies.setAutoMed(autoMedRem);

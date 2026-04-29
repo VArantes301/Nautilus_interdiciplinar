@@ -19,7 +19,9 @@ public class Medic extends Employee {
         setEsp(esp);
     }
 
-    public String getCrm() { return this.crm; }
+    public String getCrm() { 
+        return this.crm; 
+    }
 
     public void setCrm(String fCrm) {
         if (fCrm != null && fCrm.matches("[0-9]+") && fCrm.length() >= 4) {

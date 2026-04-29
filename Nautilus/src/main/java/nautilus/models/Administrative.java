@@ -27,12 +27,12 @@ public class Administrative extends Employee {
     }
 
     public void createEmployee(Employee aEmployee, String nomeEmp, String cpfEmp, String rgEmp,
-                               EnumEmp.EnumEmpl funEmp String matrEmp, LocalDate nascEmp, String senhaEmp) {
+                               EnumEmp.EnumEmpl funEmp, String matrEmp, LocalDate nascEmp, String senhaEmp) {
         try {
             aEmployee.setNome(nomeEmp);
             aEmployee.setCpf(cpfEmp);
             aEmployee.setRg(rgEmp);
-            aEmployee.setFuncao(funEmp)
+            aEmployee.setFuncao(funEmp);
             aEmployee.setMatricula(matrEmp);
             aEmployee.setDataNasc(nascEmp);
             aEmployee.setSenha(senhaEmp);

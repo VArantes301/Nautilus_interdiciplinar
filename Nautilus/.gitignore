@@ -1,9 +1,15 @@
 ### IntelliJ IDEA ###
-.idea/
+/home/vince/Documentos/Nautilus/Nautilus/.idea
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .kotlin
+
+*.class
+*.jar
+*.war
+*.ear
+target/
 
 ### Eclipse ###
 .apt_generated

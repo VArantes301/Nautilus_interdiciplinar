@@ -2,7 +2,7 @@ package nautilus.models;
 
 public class patient {
 
-    private static int genId = 0
+    private static int genId = 0;
 
     private final int id;
     private String triagem;
@@ -25,7 +25,7 @@ public class patient {
         if (fTriagem != null) {
             this.triagem = fTriagem;
         } else {
-            throw new IllegalArgumentException("E necessário digitar um valor para triagem!")
+            throw new IllegalArgumentException("E necessário digitar um valor para triagem!");
         }
     }
 

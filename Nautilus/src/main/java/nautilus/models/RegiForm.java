@@ -1,15 +1,19 @@
 package nautilus.models;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+
 public class RegiForm {
 
     private String nome;
     private String cpf;
     private String rg;
-    private LocalDate dataNasc;
+    private String dataNasc;
     private String cartSUS;
     private int idade;
 
-    public RegiForm (String nome, String cpf, String rg, LocalDate dataNasc, String cartSUS, int idade) {
+    public RegiForm (String nome, String cpf, String rg, String dataNasc, String cartSUS, int idade) {
 
         setNome(nome);
         setCpf(cpf);
@@ -47,7 +51,7 @@ public class RegiForm {
         return this.rg;
     }
 
-    public void setRg(String rg) {
+    public void setRg(String fRg) {
         if (fRg != null && fRg.matches("[0-9]+") && fRg.length() == 9) {
             this.rg = fRg;
         } else {
@@ -55,29 +59,42 @@ public class RegiForm {
         }
     }
 
-    public LocalDate getDataNasc() {
+    public String getDataNasc() {
         return this.dataNasc;
     }
 
-    public void setDataNasc(LocalDate dataNasc) {
-        if (fDataNasc != null && fDataNasc.isBefore(LocalDate.now())) {
-            this.dataNasc = fDataNasc
-        } else {
-            throw new IllegalArgumentException("Digite uma data valida.");
+    public void setDataNasc(String fDataNasc) {
+        try {
+            DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate data = LocalDate.parse(fDataNasc, formatador);
+
+            if (data.isBefore(LocalDate.now())) {
+                this.dataNasc = fDataNasc;
+            } else {
+                throw new IllegalArgumentException("Digite uma data valida.");
+            }
+            
+        } catch (Exception e) {
+                throw new IllegalArgumentException("Formato de data invalido! Use dd/MM/yyyy.");
         }
     }
 
     public String getCartSUS() {
-        return this.CartSUS;
+        return this.cartSUS;
     }
 
     public void setCartSUS(String fCartSUS) {
         if (fCartSUS != null && fCartSUS.matches("[0-9]+") && fCartSUS.length() == 15) {
-            this.cartSUS = cartSUS;
+            this.cartSUS = fCartSUS;
         } else {
             throw new IllegalArgumentException("Digite um cartão SUS valido!.");
         }
     }
 
-}
+    public int getIdade() {
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate nascimento = LocalDate.parse(this.dataNasc, formatador);
+        return Period.between(nascimento, LocalDate.now()).getYears();
+    }
+
 }
