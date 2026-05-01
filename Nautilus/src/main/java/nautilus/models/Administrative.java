@@ -8,7 +8,7 @@ public class Administrative extends Employee {
     private float verba;
 
     public Administrative(String nome, String cpf, String rg, String matricula,
-                          LocalDate dataNasc, String senha, float verba) {
+                          String dataNasc, String senha, float verba) {
         super(nome, cpf, rg, EnumEmp.EnumEmpl.ADMINISTRATIVO, matricula, dataNasc, senha);
 
         setVerba(verba);
@@ -27,7 +27,7 @@ public class Administrative extends Employee {
     }
 
     public void createEmployee(Employee aEmployee, String nomeEmp, String cpfEmp, String rgEmp,
-                               EnumEmp.EnumEmpl funEmp, String matrEmp, LocalDate nascEmp, String senhaEmp) {
+                               EnumEmp.EnumEmpl funEmp, String matrEmp, String nascEmp, String senhaEmp) {
         try {
             aEmployee.setNome(nomeEmp);
             aEmployee.setCpf(cpfEmp);

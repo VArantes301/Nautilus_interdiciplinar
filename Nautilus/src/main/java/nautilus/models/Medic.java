@@ -9,7 +9,7 @@ public class Medic extends Employee {
     private int consultorio;
     private EnumEmp.EnuMed esp;
 
-    public Medic(String nome, String cpf, String rg, String matricula, LocalDate dataNasc,
+    public Medic(String nome, String cpf, String rg, String matricula, String dataNasc,
                  String senha, String crm, int consultorio, EnumEmp.EnuMed esp) {
 
         super(nome, cpf, rg, EnumEmp.EnumEmpl.MEDICO, matricula, dataNasc, senha);

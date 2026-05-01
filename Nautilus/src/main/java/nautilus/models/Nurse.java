@@ -8,7 +8,7 @@ public class Nurse extends Employee {
     private String coren;
     private EnumEmp.EnumNur composta;
 
-    public Nurse(String nome, String cpf, String rg, String matricula, LocalDate dataNasc,
+    public Nurse(String nome, String cpf, String rg, String matricula, String dataNasc,
                  String senha, String coren, EnumEmp.EnumNur composta) {
 
         super(nome, cpf, rg, EnumEmp.EnumEmpl.ENFERMEIRO, matricula, dataNasc, senha);

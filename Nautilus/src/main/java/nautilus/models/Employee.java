@@ -3,11 +3,12 @@ package nautilus.models;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import nautilus.enums.EnumEmp;
-import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class Employee {
 
     private static int genId = 0;
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     private String nome;
     private String cpf;
@@ -28,7 +29,7 @@ public class Employee {
         setMatricula(matricula);
         setDataNasc(dataNasc);
         setSenha(senha);
-        this.id = ++genId;
+        this.id     = ++genId;
     }
 
     public String getNome() {
@@ -114,14 +115,15 @@ public class Employee {
 
     public void setSenha(String fSenha) {
         if (fSenha != null && fSenha.length() >= 8) {
-            this.senha = BCrypt.hashpw(fSenha, BCrypt.gensalt());
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            this.senha = encoder.encode(fSenha);
         } else {
             throw new IllegalArgumentException("Senha invalida! Minimo 8 caracteres.");
         }
     }
 
     public boolean verificarSenha(String fSenha) {
-        return BCrypt.checkpw(fSenha, this.senha);
+        return encoder.matches(fSenha, this.senha);
     }
 
     public int getId() {

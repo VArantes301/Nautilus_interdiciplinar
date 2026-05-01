@@ -9,7 +9,7 @@ public class Pharmaceutical extends Employee {
 
     private String crf;
 
-    public Pharmaceutical (String nome, String cpf, String rg, String matricula, LocalDate dataNasc, String senha,
+    public Pharmaceutical (String nome, String cpf, String rg, String matricula, String dataNasc, String senha,
                            String crf) {
 
         super(nome, cpf, rg, EnumEmp.EnumEmpl.FARMACEUTICO, matricula, dataNasc, senha);
@@ -48,16 +48,16 @@ public class Pharmaceutical extends Employee {
     }
 
 
-    public void createBatc (Batch aBatch,  float precoBatc, LocalDate fabBatc, LocalDate valBatc,
-                            int numLoteBatc, LocalDate datCadBatc) {
+    public void createBatc (Batch aBatch,  float precoBatc, String fabBatc, String valBatc,
+                            int numLoteBatc, String datCadBatc) {
 
         try {
-
             aBatch.setPreco(precoBatc);
             aBatch.setFab(fabBatc);
             aBatch.setVal(valBatc);
             aBatch.setNumLote(numLoteBatc);
             aBatch.setDatCad(datCadBatc);
+
         } catch (IllegalArgumentException e) {
             System.out.println("erro ao criar lote" + e.getMessage());
         }

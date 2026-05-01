@@ -1,6 +1,7 @@
 package nautilus.models;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import nautilus.enums.EnumRem;
 
 public class Batch extends Remedies {
@@ -13,7 +14,7 @@ public class Batch extends Remedies {
 
     public Batch(String nome, EnumRem.opTarja tarja, EnumRem.opFarm forFarmac, EnumRem.opVia viaAdm,
                  String regAnvisa, boolean autoMed, EnumRem.opStatus status, int quant,
-                 float preco, LocalDate fab, LocalDate val, int numLote, LocalDate datCad) {
+                 float preco, String fab, String val, int numLote, String datCad) {
 
         super(nome, tarja, forFarmac, viaAdm, regAnvisa, autoMed, status, quant);
         
@@ -40,11 +41,20 @@ public class Batch extends Remedies {
         return this.fab;
     }
 
-    public void setFab(LocalDate rFab) {
-        if (rFab != null && rFab.isBefore(LocalDate.now())) {
-            this.fab = rFab;
-        } else {
-            throw new IllegalArgumentException("Data de fabricacao invalida!");
+    public void setFab(String rFab) {
+        try {
+            DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate data = LocalDate.parse(rFab, formatador);
+
+            if (data.isBefore(LocalDate.now())) {
+                this.fab = data;
+            } else {
+                throw new IllegalArgumentException("Formato de data invalido! Use dd/MM/yyyy.");
+            }
+        }catch (IllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Formato de data invalido! Use dd/MM/yyyy.");
         }
     }
 
@@ -52,11 +62,20 @@ public class Batch extends Remedies {
         return this.val;
     }
 
-    public void setVal(LocalDate rVal) {
-        if (rVal != null && rVal.isAfter(LocalDate.now())) {
-            this.val = rVal;
-        } else {
-            throw new IllegalArgumentException("Nao e possivel cadastrar um item vencido!");
+    public void setVal(String rVal) {
+        try {
+            DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate data = LocalDate.parse(rVal, formatador);
+
+            if (data.isAfter(this.fab)) {
+                this.val = data;
+            } else {
+                throw new IllegalArgumentException("Data de validade invalida! Deve ser maior que a data de fabricacao.");
+            }
+        }catch (IllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Formato de data invalido! Use dd/MM/yyyy.");
         }
     }
 
@@ -76,11 +95,20 @@ public class Batch extends Remedies {
         return this.datCad;
     }
 
-    public void setDatCad(LocalDate rDatCad) {
-        if (rDatCad != null && !rDatCad.isAfter(LocalDate.now())) {
-            this.datCad = rDatCad;
-        } else {
-            throw new IllegalArgumentException("Data de cadastro invalida!");
+    public void setDatCad(String rDatCad) {
+        try {
+            DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate data = LocalDate.parse(rDatCad, formatador);
+
+            if (data.isBefore(LocalDate.now())) {
+                this.datCad = data;
+            } else {
+                throw new IllegalArgumentException("Formato de data invalido! Use dd/MM/yyyy.");
+            }
+        } catch (IllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Formato de data invalido! Use dd/MM/yyyy.");
         }
     }
 }
